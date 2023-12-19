@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>APP Parametros</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1> Estructuras </h1>
+        <h3> Declaración de variables </h3>
+        {{with $valor:="Mi valor xd"}}
+            <p> {{$valor}} </p>
+        {{end}}
+
+        <hr />
+
+        <h3> Valores con struct</h3>
+        <p>Nombre: {{.Nombre}}</p>
+        <p>Edad: {{.Edad}}</p>
+        <p>Perfil: {{.Perfil}}</p>
+
+
+        <hr />
+        <h3> Condicionales </h3>
+        {{if ge .Edad 18}}
+        <p> Eres mayor de edad </p>
+        {{else}}
+        <p> Eres mayor de edad </p>
+        {{end}}
+
+        {{if eq .Perfil 1}}
+        <p>  Eres admin </p>
+        {{else}}
+        <p> No eres admin </p>        
+        {{end}}
+
+
+        <hr />
+        <h3> Iteraciones </h3>
+        <ul> 
+            {{range .Habilidades}}
+                <li> {{.Nombre}}</li>
+            {{end}}
+        </ul>
+    </body>
+</html>
