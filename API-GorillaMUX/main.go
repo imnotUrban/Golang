@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 /*
@@ -22,6 +23,10 @@ func main() {
 	mux.HandleFunc(prefijo+"ejemplo", handlers.Ejemplo_post).Methods("POST")
 	mux.HandleFunc(prefijo+"ejemplo/{id:[0-9]+}", handlers.Ejemplo_put).Methods("PUT")
 	mux.HandleFunc(prefijo+"ejemplo/{id:[0-9]+}", handlers.Ejemplo_delete).Methods("DELETE")
+	mux.HandleFunc(prefijo+"upload", handlers.Upload_file).Methods("POST")
+	mux.HandleFunc(prefijo+"view", handlers.View_file).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":8084", mux))
+	handler := cors.AllowAll().Handler(mux)
+	// log.Fatal(http.ListenAndServe(":8084", mux))  -> Se usa cuando no ponemos tenemos mux
+	log.Fatal(http.ListenAndServe(":8084", handler))
 }

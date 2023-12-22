@@ -54,3 +54,22 @@ https://www.developerro.com/2023/06/14/goroutines-channels/
 
 La carpeta dto sirve para tener la estructura de los objetos que nos llega en las peticiones por ejemplo
 transferir información entre las capas de una aplicación 
+
+
+##### Endpoint para subir un archivo
+
+Upload_file
+
+
+
+#### Endpoint para ver un archivo
+ -> Es un método de renderización buffer
+
+http://localhost:8084/api/view?folder=fotos&file=20231222192809.png
+
+
+### Activar CORS
+
+go get github.com/rs/cors
+
+Luego se pone en el main
