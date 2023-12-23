@@ -73,3 +73,20 @@ http://localhost:8084/api/view?folder=fotos&file=20231222192809.png
 go get github.com/rs/cors
 
 Luego se pone en el main
+
+
+## Instalar GORM
+
+``
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/mysql
+``
+
+## instalar variables de entorno
+
+go get github.com/joho/godotenv
+
+
+## Lib para hacer slugs
+
+go get github.com/gosimple/slug

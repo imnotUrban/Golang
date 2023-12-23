@@ -14,6 +14,11 @@ import (
  */
 
 func main() {
+
+	//Migrar db
+
+	//	models.Migraciones()
+
 	mux := mux.NewRouter()
 	prefijo := "/api/"
 
@@ -25,6 +30,9 @@ func main() {
 	mux.HandleFunc(prefijo+"ejemplo/{id:[0-9]+}", handlers.Ejemplo_delete).Methods("DELETE")
 	mux.HandleFunc(prefijo+"upload", handlers.Upload_file).Methods("POST")
 	mux.HandleFunc(prefijo+"view", handlers.View_file).Methods("GET")
+	mux.HandleFunc(prefijo+"categorias", handlers.Categoria_get).Methods("GET")
+	mux.HandleFunc(prefijo+"categorias/{id:[0-9]+}", handlers.Categoria_get_params).Methods("GET")
+	mux.HandleFunc(prefijo+"categorias", handlers.Categoria_post).Methods("POST")
 
 	handler := cors.AllowAll().Handler(mux)
 	// log.Fatal(http.ListenAndServe(":8084", mux))  -> Se usa cuando no ponemos tenemos mux
