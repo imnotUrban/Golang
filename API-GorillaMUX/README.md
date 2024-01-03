@@ -90,3 +90,13 @@ go get github.com/joho/godotenv
 ## Lib para hacer slugs
 
 go get github.com/gosimple/slug
+
+
+
+## Encriptación de contraseñas
+
+go get golang.org/x/crypto/bcrypt
+
+
+## JWT 
+go get github.com/golang-jwt/jwt

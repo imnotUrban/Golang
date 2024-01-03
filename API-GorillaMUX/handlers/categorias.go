@@ -68,3 +68,76 @@ func Categoria_post(response http.ResponseWriter, request *http.Request) {
 	response.WriteHeader(http.StatusCreated)
 	json.NewEncoder(response).Encode(respuesta)
 }
+
+func Categoria_put(response http.ResponseWriter, request *http.Request) {
+	vars := mux.Vars(request)
+	var id, _ = strconv.Atoi(vars["id"])
+	response.Header().Set("Content-Type", "application/json")
+	var categoria dto.CategoriaDto
+	if err := json.NewDecoder(request.Body).Decode(&categoria); err != nil {
+		respuesta := map[string]string{
+			"estado":  "error",
+			"mensaje": "Recurso no disponible",
+		}
+		response.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(response).Encode(respuesta)
+		return
+	}
+	datos := models.Categoria{}
+	if err := database.Database.First(&datos, id); err != nil {
+		respuesta := map[string]string{
+			"estado":  "error",
+			"mensaje": "Recurso no disponible",
+		}
+		response.WriteHeader(http.StatusCreated)
+		json.NewEncoder(response).Encode(respuesta)
+	} else {
+		datos.Nombre = categoria.Nombre
+		datos.Slug = slug.Make(categoria.Nombre)
+		database.Database.Save(&datos)
+
+		respuesta := map[string]string{
+			"estado":  "ok",
+			"mensaje": "Se edito el registro correctamente",
+		}
+		response.WriteHeader(http.StatusCreated)
+		json.NewEncoder(response).Encode(respuesta)
+
+	}
+}
+
+func Categoria_delete(response http.ResponseWriter, request *http.Request) {
+	vars := mux.Vars(request)
+	var id, _ = strconv.Atoi(vars["id"])
+	response.Header().Set("Content-Type", "application/json")
+	var categoria dto.CategoriaDto
+	if err := json.NewDecoder(request.Body).Decode(&categoria); err != nil {
+		respuesta := map[string]string{
+			"estado":  "error",
+			"mensaje": "Recurso no disponible",
+		}
+		response.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(response).Encode(respuesta)
+		return
+	}
+	datos := models.Categoria{}
+	if err := database.Database.First(&datos, id); err != nil {
+		respuesta := map[string]string{
+			"estado":  "error",
+			"mensaje": "Recurso no disponible",
+		}
+		response.WriteHeader(http.StatusCreated)
+		json.NewEncoder(response).Encode(respuesta)
+	} else {
+		database.Database.Delete(&datos)
+
+		respuesta := map[string]string{
+			"estado":  "ok",
+			"mensaje": "Se elimino el registro correctamente",
+		}
+		response.WriteHeader(http.StatusCreated)
+		json.NewEncoder(response).Encode(respuesta)
+
+	}
+
+}
